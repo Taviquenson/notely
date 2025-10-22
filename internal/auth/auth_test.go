@@ -14,7 +14,7 @@ func TestGetAPIKey(t *testing.T) {
 		expect    string
 		expectErr string
 	}{
-		"correct":                    {key: "Authorization", value: "ApiKey CorrectKey", expect: "", expectErr: "not expecting an error"},
+		"correct":                    {key: "Authorization", value: "ApiKey CorrectKey", expect: "CorrectKey", expectErr: "not expecting an error"},
 		"empty header":               {expectErr: "no authorization header"},
 		"empty authorization header": {key: "Authorization", expectErr: "no authorization header"},
 		"malformed":                  {key: "Authorization", value: "ApiKey-CorrectKey", expectErr: "malformed authorization header"},
@@ -35,7 +35,7 @@ func TestGetAPIKey(t *testing.T) {
 			}
 
 			if output != test.expect {
-				t.Errorf("Unexpected:%s", output)
+				t.Errorf("Unexpected output:%s", output)
 				return
 			}
 		})
